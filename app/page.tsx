@@ -24,17 +24,17 @@ const brands = ["FIELDPIECE", "SPIN", "NEUTRONICS", "AAB SMART", "TECNO SYSTEMI"
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const orbRef = useRef<HTMLDivElement>(null);
+  const systemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const orb = orbRef.current;
-    if (!orb || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const system = systemRef.current;
+    if (!system || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const onMove = (event: PointerEvent) => {
-      const rect = orb.getBoundingClientRect();
+      const rect = system.getBoundingClientRect();
       const x = (event.clientX - (rect.left + rect.width / 2)) * 0.045;
       const y = (event.clientY - (rect.top + rect.height / 2)) * 0.045;
-      orb.animate(
+      system.animate(
         { transform: `translate3d(${x}px, ${y}px, 0)` },
         { duration: 420, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" },
       );
@@ -80,14 +80,34 @@ export default function Home() {
         </div>
 
         <div className="hero-visual" aria-hidden="true">
-          <div className="orb" ref={orbRef}>
-            <div className="orb-core">V</div>
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
+          <div className="hvac-system" ref={systemRef}>
+            <div className="system-grid" />
+            <div className="indoor-unit">
+              <span className="unit-led" />
+              <div className="indoor-vent"><i /><i /><i /><i /><i /></div>
+              <span className="unit-name">İÇ ÜNİTE</span>
+              <div className="cool-air"><i /><i /><i /></div>
+            </div>
+            <div className="outdoor-unit">
+              <div className="fan"><i /><i /><i /></div>
+              <div className="side-vents"><i /><i /><i /><i /></div>
+              <span className="unit-name">DIŞ ÜNİTE</span>
+            </div>
+            <div className="refrigerant-circuit">
+              <div className="pipe liquid-line">
+                <span className="fluid particle-one" /><span className="fluid particle-two" /><span className="fluid particle-three" />
+                <small>SIVI HATTI • YÜKSEK BASINÇ</small>
+              </div>
+              <div className="pipe gas-line">
+                <span className="fluid particle-one" /><span className="fluid particle-two" /><span className="fluid particle-three" />
+                <small>GAZ HATTI • DÜŞÜK BASINÇ</small>
+              </div>
+            </div>
+            <div className="cycle-status"><span /> SOĞUTUCU AKIŞKAN ÇEVRİMİ</div>
           </div>
           <div className="metric metric-one"><strong>HVACR</strong><span>Uzmanlık ve<br />saha deneyimi</span></div>
           <div className="metric metric-two"><strong>360°</strong><span>Teknik ürün<br />portföyü</span></div>
-          <span className="tech-label">AIRFLOW / PRESSURE / TEMPERATURE</span>
+          <span className="tech-label">EVAPORATION / COMPRESSION / CONDENSATION</span>
         </div>
       </section>
 
