@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
+
+const montserrat = Montserrat({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const headerList = await headers();
@@ -28,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" className={montserrat.variable}>
       <body>{children}</body>
     </html>
   );
