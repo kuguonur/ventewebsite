@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 
 const services = [
   {
@@ -22,9 +23,44 @@ const services = [
 
 const brands = ["FIELDPIECE", "SPIN", "NEUTRONICS", "AAB SMART", "TECNO SYSTEMI"];
 
+const productSlides = [
+  {
+    eyebrow: "BORU İŞLEME TEKNOLOJİLERİ",
+    title: "Havşa açma ve boru şişirme",
+    text: "Bakır ve alüminyum borularda hızlı, temiz ve tekrarlanabilir uygulamalar için profesyonel çözümler.",
+    image: "/slide-spin.jpg",
+    brand: "SPIN TOOLS",
+  },
+  {
+    eyebrow: "TEST & ÖLÇÜM CİHAZLARI",
+    title: "HVAC ölçümlerinde tam kontrol",
+    text: "Sahada daha hızlı teşhis, hassas ölçüm ve güvenilir raporlama için profesyonel cihaz ekosistemi.",
+    image: "/slide-fieldpiece.jpg",
+    brand: "FIELDPIECE",
+  },
+  {
+    eyebrow: "PROFESYONEL EL ALETLERİ",
+    title: "Servis ve montajda güçlü ekipman",
+    text: "Boru bükme, kesme ve şekillendirme işlemlerinde HVAC teknisyenleri için dayanıklı el aletleri.",
+    image: "/slide-black-diamond.jpg",
+    brand: "BLACK DIAMOND",
+  },
+  {
+    eyebrow: "KAÇAK TESPİT ÇÖZÜMLERİ",
+    title: "Kaçakları hızlı ve güvenli bulun",
+    text: "Soğutma ve iklimlendirme sistemlerinde servis süresini azaltan profesyonel kaçak tespit teknolojileri.",
+    image: "/slide-spectroline.jpg",
+    brand: "SPECTROLINE",
+  },
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const systemRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({ startX: 0, lastX: 0, lastTime: 0, velocity: 0 });
 
   useEffect(() => {
     const system = systemRef.current;
@@ -42,6 +78,45 @@ export default function Home() {
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
+
+  useEffect(() => {
+    if (dragging) return;
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % productSlides.length);
+    }, 7000);
+    return () => window.clearInterval(timer);
+  }, [dragging]);
+
+  const moveSlide = (direction: number) => {
+    setActiveSlide((current) => (current + direction + productSlides.length) % productSlides.length);
+  };
+
+  const onSliderPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = { startX: event.clientX, lastX: event.clientX, lastTime: performance.now(), velocity: 0 };
+    setDragging(true);
+  };
+
+  const onSliderPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+    const now = performance.now();
+    const elapsed = Math.max(1, now - dragRef.current.lastTime);
+    dragRef.current.velocity = ((event.clientX - dragRef.current.lastX) / elapsed) * 1000;
+    dragRef.current.lastX = event.clientX;
+    dragRef.current.lastTime = now;
+    const raw = event.clientX - dragRef.current.startX;
+    setDragX(raw * (1 / (1 + Math.abs(raw) / 700)));
+  };
+
+  const onSliderPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+    const distance = event.clientX - dragRef.current.startX;
+    const projected = distance + dragRef.current.velocity * 0.18;
+    if (projected < -80) moveSlide(1);
+    if (projected > 80) moveSlide(-1);
+    setDragX(0);
+    setDragging(false);
+  };
 
   return (
     <main>
@@ -115,6 +190,56 @@ export default function Home() {
         <span className="rail-label">GÜVENİLEN TEKNOLOJİLER</span>
         <div className="brand-list">
           {brands.map((brand) => <span key={brand}>{brand}</span>)}
+        </div>
+      </section>
+
+      <section className="products-slider" aria-labelledby="products-title">
+        <div className="slider-heading">
+          <div>
+            <p className="eyebrow"><span /> ÜRÜN GRUPLARI</p>
+            <h2 id="products-title">Sahaya özel<br /><em>teknolojiler.</em></h2>
+          </div>
+          <div className="slider-controls">
+            <span>{String(activeSlide + 1).padStart(2, "0")} / {String(productSlides.length).padStart(2, "0")}</span>
+            <button type="button" onClick={() => moveSlide(-1)} aria-label="Önceki ürün grubu">←</button>
+            <button type="button" onClick={() => moveSlide(1)} aria-label="Sonraki ürün grubu">→</button>
+          </div>
+        </div>
+        <div
+          className={`slider-viewport ${dragging ? "dragging" : ""}`}
+          onPointerDown={onSliderPointerDown}
+          onPointerMove={onSliderPointerMove}
+          onPointerUp={onSliderPointerUp}
+          onPointerCancel={onSliderPointerUp}
+        >
+          <div
+            className="slider-track"
+            style={{
+              width: `${productSlides.length * 100}%`,
+              transform: `translate3d(calc(${-activeSlide * (100 / productSlides.length)}% + ${dragX}px), 0, 0)`,
+            }}
+          >
+            {productSlides.map((slide, index) => (
+              <article className="product-slide" style={{ width: `${100 / productSlides.length}%` }} key={slide.title} aria-hidden={activeSlide !== index}>
+                <img src={slide.image} alt="" draggable={false} />
+                <div className="slide-shade" />
+                <div className="slide-copy">
+                  <span className="slide-brand">{slide.brand}</span>
+                  <p>{slide.eyebrow}</p>
+                  <h3>{slide.title}</h3>
+                  <div className="slide-bottom">
+                    <span>{slide.text}</span>
+                    <a href="#iletisim" tabIndex={activeSlide === index ? 0 : -1}>Ürün grubunu inceleyin ↗</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className="slider-dots" aria-label="Ürün grubu slaytları">
+          {productSlides.map((slide, index) => (
+            <button key={slide.title} type="button" className={activeSlide === index ? "active" : ""} onClick={() => setActiveSlide(index)} aria-label={`${index + 1}. slayta git`} />
+          ))}
         </div>
       </section>
 
