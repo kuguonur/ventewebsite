@@ -19,7 +19,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--blue); outline-
 
 .nav { position: fixed; z-index: 50; top: 1rem; left: 4vw; right: 4vw; height: 4.5rem; padding: 0 1.15rem; display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, .82); color: var(--ink); border: 1px solid rgba(32,136,208,.15); border-radius: 1.15rem; backdrop-filter: blur(22px) saturate(160%); box-shadow: 0 1rem 3rem rgba(18,71,108,.12); }
 .brand { display: inline-flex; align-items: center; gap: .72rem; font-weight: 830; letter-spacing: -.04em; font-size: 1.15rem; }
-.brand img { display: block; width: 6.5rem; height: 2.7rem; object-fit: contain; mix-blend-mode: multiply; }
+.brand img { display: block; width: 9.5rem; height: 3.5rem; object-fit: contain; mix-blend-mode: multiply; }
 .nav-links { display: flex; align-items: center; gap: 2.15rem; font-size: .79rem; font-weight: 650; }
 .nav-links a { transition: color .2s ease; }
 .nav-links a:hover { color: var(--blue); }
@@ -161,7 +161,7 @@ h1 em, h2 em { color: #2088d0; font-family: inherit; font-style: normal; font-we
 .contact-row p { margin: 0; font-size: .85rem; line-height: 1.55; }
 
 footer { padding: 4rem 6vw 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: start; gap: 3rem; background: var(--paper); color: var(--ink); border-top: 1px solid var(--line); }
-.footer-brand img { width: 8rem; background: #fff; border-radius: .5rem; padding: .25rem; }
+.footer-brand img { width: 8rem; height: auto; background: #fff; border-radius: .5rem; padding: .25rem; }
 footer p, footer small { color: #797e74; font-size: .72rem; }
 .socials { display: flex; gap: 1.3rem; font-size: .72rem; justify-self: end; }
 footer small { grid-column: 1 / -1; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); width: 100%; }
@@ -200,6 +200,7 @@ footer small { grid-column: 1 / -1; margin-top: 3rem; padding-top: 1.5rem; borde
 }
 
 @media (max-width: 540px) {
+  .nav .brand img { width: 8rem; height: 3.1rem; }
   .hero h1 { font-size: clamp(3.55rem, 18vw, 5rem); }
   .hero-actions { align-items: stretch; flex-direction: column; gap: .5rem; }
   .primary-button { min-width: auto; }
