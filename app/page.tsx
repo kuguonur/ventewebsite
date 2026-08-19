@@ -5,18 +5,18 @@ import { useEffect, useRef, useState } from "react";
 const services = [
   {
     no: "01",
-    title: "Pazar Giriş Stratejisi",
-    text: "Türkiye pazarına giren global teknoloji şirketleri için konumlandırma, bayi ağı ve kilit müşteri yönetimi.",
+    title: "Test & Ölçüm Teknolojileri",
+    text: "HVAC profesyonelleri için dijital manifold, kaçak tespit, vakum, hava debisi ve soğutucu akışkan analiz çözümleri.",
   },
   {
     no: "02",
-    title: "Temsilcilik & Dağıtım",
-    text: "HVACR alanındaki yeni nesil ürünleri doğru kanallar, teknik bilgi ve yerel saha deneyimiyle buluşturuyoruz.",
+    title: "Servis & Montaj Ekipmanları",
+    text: "Klima ve soğutma servislerine yönelik boru işleme, geri toplama, vakum ve profesyonel montaj ekipmanları.",
   },
   {
     no: "03",
-    title: "Global Tedarik",
-    text: "Türk üreticiler için uluslararası talep yaratıyor; seçimden kalite kontrole ve sevkiyata süreci yönetiyoruz.",
+    title: "İklimlendirme Sistem Aksesuarları",
+    text: "Bakır borudan kanal ve drenaj çözümlerine kadar HVAC uygulamalarını daha hızlı, güvenli ve verimli hale getiren ürünler.",
   },
 ];
 
@@ -47,8 +47,7 @@ export default function Home() {
     <main>
       <nav className="nav" aria-label="Ana navigasyon">
         <a className="brand" href="#top" aria-label="Vente ana sayfa">
-          <span className="brand-mark">V</span>
-          <span>VENTE</span>
+          <img src="/vente-logo.jpg" alt="Vente" />
         </a>
         <div className={`nav-links ${menuOpen ? "open" : ""}`}>
           <a href="#uzmanlik" onClick={() => setMenuOpen(false)}>Uzmanlığımız</a>
@@ -69,14 +68,14 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> HVACR • TEKNOLOJİ • PAZAR ERİŞİMİ</p>
-          <h1>Teknolojiyi<br />pazara <em>taşırız.</em></h1>
+          <p className="eyebrow"><span /> HVAC • SOĞUTMA • İKLİMLENDİRME</p>
+          <h1>HVAC&apos;ın<br />geleceğini <em>taşırız.</em></h1>
           <p className="hero-lead">
-            Global HVACR teknolojileriyle Türkiye arasında güçlü bir bağ kuruyor; markaları, ürünleri ve iş fırsatlarını doğru pazara ulaştırıyoruz.
+            Dünyanın yenilikçi HVAC markalarını; doğru teknik bilgi, güçlü dağıtım ağı ve sektör deneyimiyle Türkiye&apos;deki profesyonellerle buluşturuyoruz.
           </p>
           <div className="hero-actions">
             <a className="primary-button" href="#iletisim">Birlikte çalışalım <span>↗</span></a>
-            <a className="text-link" href="#uzmanlik">Neler yapıyoruz? <span>↓</span></a>
+            <a className="text-link" href="#uzmanlik">HVAC çözümlerimiz <span>↓</span></a>
           </div>
         </div>
 
@@ -86,9 +85,9 @@ export default function Home() {
             <div className="orbit orbit-one" />
             <div className="orbit orbit-two" />
           </div>
-          <div className="metric metric-one"><strong>15+</strong><span>Yıllık sektör<br />deneyimi</span></div>
-          <div className="metric metric-two"><strong>360°</strong><span>Pazar geliştirme<br />yaklaşımı</span></div>
-          <span className="tech-label">THERMAL NETWORK / 41.0082° N</span>
+          <div className="metric metric-one"><strong>HVACR</strong><span>Uzmanlık ve<br />saha deneyimi</span></div>
+          <div className="metric metric-two"><strong>360°</strong><span>Teknik ürün<br />portföyü</span></div>
+          <span className="tech-label">AIRFLOW / PRESSURE / TEMPERATURE</span>
         </div>
       </section>
 
@@ -102,8 +101,8 @@ export default function Home() {
       <section className="services" id="uzmanlik">
         <div className="section-intro">
           <p className="eyebrow dark"><span /> UZMANLIĞIMIZ</p>
-          <h2>İyi teknoloji,<br />doğru pazarda <em>değerlenir.</em></h2>
-          <p>Satıştan önce strateji, üründen sonra sürdürülebilir ilişki kuruyoruz.</p>
+          <h2>HVAC sahasında<br />profesyonel <em>çözümler.</em></h2>
+          <p>Ölçümden montaja, servisten devreye almaya kadar profesyonellerin ihtiyaç duyduğu teknoloji.</p>
         </div>
         <div className="service-grid">
           {services.map((service) => (
@@ -119,29 +118,29 @@ export default function Home() {
       </section>
 
       <section className="about" id="hakkimizda">
-        <div className="about-index">VENTE / 2009—∞</div>
+        <div className="about-index">VENTE / HVACR</div>
         <div>
           <p className="eyebrow"><span /> BİZ KİMİZ?</p>
-          <h2>Yerel deneyim.<br />Global görüş.</h2>
+          <h2>HVAC&apos;ta yerel deneyim.<br />Global teknoloji.</h2>
         </div>
         <div className="about-copy">
-          <p>Vente Dış Ticaret Danışmanlık AŞ; ısıtma, soğutma, havalandırma, enerji ve çevre teknolojilerindeki yenilikleri Türkiye pazarıyla buluşturur.</p>
-          <p>Dinamik kadromuz ve HVACR sektöründeki saha deneyimimizle, uluslararası firmaların Türkiye’de; Türk üreticilerin ise global pazarlarda büyümesini sağlıyoruz.</p>
+          <p>Vente Dış Ticaret Danışmanlık AŞ; ısıtma, soğutma, havalandırma ve iklimlendirme sektörünün profesyonel test, ölçüm, servis ve montaj teknolojilerini Türkiye pazarıyla buluşturur.</p>
+          <p>HVACR sektöründeki saha deneyimimizle yalnızca ürün tedarik etmiyor; doğru cihaz seçimi, teknik uygulama bilgisi ve satış sonrası süreçlerde kalıcı değer üretiyoruz.</p>
         </div>
       </section>
 
       <section className="contact" id="iletisim">
-        <p className="eyebrow dark"><span /> YENİ BİR PAZAR AÇALIM</p>
-        <h2>Sıradaki fırsatı<br /><em>birlikte keşfedelim.</em></h2>
+        <p className="eyebrow dark"><span /> HVAC İHTİYACINIZI KONUŞALIM</p>
+        <h2>Doğru ekipmanı<br /><em>birlikte seçelim.</em></h2>
         <div className="contact-row">
           <a className="contact-mail" href="mailto:info@vente.com.tr">info@vente.com.tr <span>↗</span></a>
-          <p>Teknolojinizi Türkiye’ye taşımak veya global pazarlara açılmak için bize ulaşın.</p>
+          <p>Ölçüm, servis, montaj veya iklimlendirme uygulamanız için en uygun profesyonel çözüme birlikte karar verelim.</p>
         </div>
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><span className="brand-mark">V</span><span>VENTE</span></a>
-        <p>Teknoloji ve Danışmanlık Hizmetleri</p>
+        <a className="brand footer-brand" href="#top"><img src="/vente-logo.jpg" alt="Vente" /></a>
+        <p>HVAC Teknolojileri ve Profesyonel Ekipmanlar</p>
         <div className="socials">
           <a href="https://www.linkedin.com/company/vente-technology-&-consulting-services" target="_blank" rel="noreferrer">LinkedIn ↗</a>
           <a href="https://www.instagram.com/vente_tech/" target="_blank" rel="noreferrer">Instagram ↗</a>

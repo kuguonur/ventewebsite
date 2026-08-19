@@ -9,18 +9,18 @@ export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = `${protocol}://${host}`;
 
   return {
-    title: "Vente | Teknolojiyi Pazara Taşırız",
-    description: "Vente; global HVACR teknolojileri, Türkiye pazarı, marka temsilciliği ve uluslararası iş geliştirme arasında güçlü bağlar kurar.",
+    title: "Vente | Profesyonel HVAC Teknolojileri",
+    description: "Vente; profesyonel HVAC test ve ölçüm cihazları, soğutma servis ekipmanları ve iklimlendirme teknolojilerini Türkiye ile buluşturur.",
     metadataBase: new URL(baseUrl),
     openGraph: {
-      title: "Vente | Teknolojiyi Pazara Taşırız",
-      description: "HVACR teknolojileri, temsilcilik ve global pazar geliştirme.",
+      title: "Vente | Profesyonel HVAC Teknolojileri",
+      description: "HVAC test, ölçüm, servis ve iklimlendirme teknolojileri.",
       images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: "Vente — Teknolojiyi pazara taşırız" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Vente | Teknolojiyi Pazara Taşırız",
-      description: "HVACR teknolojileri, temsilcilik ve global pazar geliştirme.",
+      title: "Vente | Profesyonel HVAC Teknolojileri",
+      description: "HVAC test, ölçüm, servis ve iklimlendirme teknolojileri.",
       images: [`${baseUrl}/og.png`],
     },
   };
