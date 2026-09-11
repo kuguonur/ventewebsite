@@ -27,6 +27,26 @@ footer{padding:4rem 6vw 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:
 }
 
 .asset-note{display:none}
+
+.area-selector .trade,
+.area-selector .projects,
+.area-selector .chemicals,
+.area-selector .brands,
+.area-selector .development{display:none}
+.area-selector.area-selected-1 .brands{display:block}
+.area-selector.area-selected-2 .trade{display:grid}
+.area-selector.area-selected-2 .projects{display:block}
+.area-selector.area-selected-3 .chemicals{display:grid}
+.area-selector.area-selected-4 .development{display:block}
+.business-card{border:0;text-align:left;color:var(--ink);font:inherit;cursor:pointer}
+.business-card .business-card-action{margin-top:2rem;padding-top:1rem;border-top:1px solid currentColor;display:flex;justify-content:space-between;font-size:.75rem;font-weight:750}
+.business-card .business-card-action i{font-style:normal}
+.business-card.active{background:var(--blue);color:#fff}
+.business-card.active p{color:#e9f6fd}
+.business-card.cobalt.active{background:#2655a0}
+.business-card.cyan.active{background:#0b7891}
+.business-card.navy.active{background:var(--navy)}
+.trade,.projects,.chemicals,.brands,.development{scroll-margin-top:6.5rem}
 .chemical-mark{line-height:1.04;gap:.12em}
 
 @media(max-width:1050px){
