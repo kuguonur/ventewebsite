@@ -46,17 +46,22 @@ export default function Home() {
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("lang") === "en") setLocale("en");
   }, []);
-  useEffect(() => {
-    const openDetailFromHash = () => {
-      if (window.location.hash === "#markalar") window.location.href = `/hvacr-ekipmanlari?lang=${locale}`;
-      if (window.location.hash === "#projeler") window.location.href = `/uluslararasi-ticaret?lang=${locale}`;
-    };
-    window.addEventListener("hashchange", openDetailFromHash);
-    return () => window.removeEventListener("hashchange", openDetailFromHash);
-  }, [locale]);
   const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSent(true); };
   return <main className="home-page">
-    <nav className="nav" aria-label={tr ? "Ana navigasyon" : "Main navigation"}><a className="brand" href="#top" aria-label={tr ? "Vente ana sayfa" : "Vente home"}><img src="/vente-logo.jpg" alt="Vente" /></a><div className={`nav-links ${menuOpen ? "open" : ""}`}><a href="#hakkimizda">{t.nav[0]}</a><a href="#uzmanlik">{t.nav[1]}</a><a href="#markalar">{t.nav[2]}</a><a href="#projeler">{t.nav[3]}</a><a href="#insights">{t.nav[4]}</a><a href="#iletisim">{t.nav[5]}</a><div className="language-picker" role="group" aria-label={tr ? "Dil seçimi" : "Language selection"}><button className={tr ? "active" : ""} type="button" onClick={() => setLocale("tr")} aria-pressed={tr}>🇹🇷 <span>Türkçe</span></button><button className={!tr ? "active" : ""} type="button" onClick={() => setLocale("en")} aria-pressed={!tr}>🇬🇧 <span>English</span></button></div><a className="shop-link" href="https://www.ventecihaz.com" target="_blank" rel="noreferrer" data-track="online-shop">{tr ? "Online Mağaza" : "Online Shop"} ↗</a></div><button className="menu-button" type="button" aria-expanded={menuOpen} aria-label={tr ? "Menü" : "Menu"} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button></nav>
+    <nav className="nav" aria-label={tr ? "Ana navigasyon" : "Main navigation"}>
+      <a className="brand" href="#top" aria-label={tr ? "Vente ana sayfa" : "Vente home"}><img src="/vente-logo.jpg" alt="Vente" /></a>
+      <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <a href="#hakkimizda">{t.nav[0]}</a>
+        <a href="#uzmanlik">{t.nav[1]}</a>
+        <a href="#iletisim">{t.nav[5]}</a>
+        <div className="language-picker" role="group" aria-label={tr ? "Dil seçimi" : "Language selection"}>
+          <button className={tr ? "active" : ""} type="button" onClick={() => setLocale("tr")} aria-pressed={tr}>🇹🇷 <span>Türkçe</span></button>
+          <button className={!tr ? "active" : ""} type="button" onClick={() => setLocale("en")} aria-pressed={!tr}>🇬🇧 <span>English</span></button>
+        </div>
+        <a className="shop-link" href="https://www.ventecihaz.com" target="_blank" rel="noreferrer" data-track="online-shop">{tr ? "Online Mağaza" : "Online Shop"} ↗</a>
+      </div>
+      <button className="menu-button" type="button" aria-expanded={menuOpen} aria-label={tr ? "Menü" : "Menu"} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
+    </nav>
     <section className="hero hero-new" id="top"><div className="hero-media" aria-hidden="true">{heroSlides.map((image, index) => <img key={image} src={image} alt="" className={heroSlide === index ? "active" : ""} />)}<div className="hero-overlay" /></div><div className="hero-copy"><p className="eyebrow"><span /> {t.eyebrow}</p><h1>{t.hero}</h1><p className="hero-lead">{t.lead}</p><div className="hero-actions"><a className="primary-button" href="#hakkimizda">{t.discover} <span>↗</span></a><a className="text-link" href="#uzmanlik">{t.areas} <span>↓</span></a></div></div><div className="hero-pagination">{heroSlides.map((_, index) => <button key={index} className={heroSlide === index ? "active" : ""} onClick={() => setHeroSlide(index)} aria-label={`${index + 1}. görsel`} />)}</div></section>
     <section className="manifesto"><span>{tr ? "DOĞRU ÜRÜNÜ BULMAK." : "FINDING THE RIGHT PRODUCT."}</span><span>{tr ? "DOĞRU ORTAKLIĞI KURMAK." : "BUILDING THE RIGHT PARTNERSHIP."}</span><span>{tr ? "DOĞRU PAZARLA BULUŞTURMAK." : "CONNECTING IT WITH THE RIGHT MARKET."}</span></section>
     <section className="business" id="uzmanlik"><header className="section-head"><p className="eyebrow dark"><span /> {t.what}</p><h2>{t.whatTitle}</h2><p>{tr ? "İlgilendiğiniz iş kolunu seçerek özel detay sayfasını inceleyin." : "Choose a business area to explore its dedicated detail page."}</p></header><div className="business-grid">{businessAreas.map((area, index) => {const a=tr?area.tr:area.en;const routes=["/hvacr-ekipmanlari","/uluslararasi-ticaret","/vente-kimya","/is-gelistirme"];return <a className={`business-card ${area.tone}`} href={`${routes[index]}?lang=${locale}`} key={area.no}><div><span>{area.no}</span><small>{a[0]}</small></div><h3>{a[1]}</h3><p>{a[2]}</p><span className="business-card-action">{a[3]} <i>↗</i></span></a>})}</div></section>
