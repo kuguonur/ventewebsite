@@ -12,6 +12,19 @@ const routes: Record<BusinessArea, string> = {
   development: "/is-gelistirme",
 };
 
+const hvacrBrands = [
+  { name: "FIELDPIECE", tr: "Test ve ölçüm", en: "Test & measurement", fr: "Test et mesure" },
+  { name: "WIPCOOL", tr: "HVACR servis ekipmanları", en: "HVACR service equipment", fr: "Équipements de service HVACR" },
+  { name: "BLACK DIAMOND", tr: "Profesyonel el aletleri", en: "Professional hand tools", fr: "Outillage professionnel" },
+  { name: "SPECTROLINE", tr: "Kaçak tespit teknolojileri", en: "Leak detection technologies", fr: "Technologies de détection des fuites" },
+  { name: "WEH", tr: "Bağlantı teknolojileri", en: "Connection technologies", fr: "Technologies de raccordement" },
+  { name: "MSA", tr: "Güvenlik teknolojileri", en: "Safety technologies", fr: "Technologies de sécurité" },
+  { name: "SUPERIOR ACCUTRAK", tr: "Ultrasonik tespit", en: "Ultrasonic detection", fr: "Détection ultrasonique" },
+  { name: "ACCUTOOLS", tr: "Profesyonel servis ekipmanları", en: "Professional service equipment", fr: "Équipements de service professionnels" },
+  { name: "REFRIGERATION TECHNOLOGIES", tr: "HVACR bakım kimyasalları", en: "HVACR maintenance chemicals", fr: "Produits chimiques de maintenance HVACR" },
+  { name: "TECNOSYSTEMI", tr: "HVAC aksesuarları", en: "HVAC accessories", fr: "Accessoires HVAC" },
+] as const;
+
 const content = {
   hvacr: {
     no: "01",
@@ -182,6 +195,11 @@ export default function BusinessDetail({ area }: { area: BusinessArea }) {
       <header><p className="eyebrow dark"><span /> {l("ÇÖZÜMLER", "SOLUTIONS", "SOLUTIONS")}</p><h2>{l("Bu alanda neler yapıyoruz?", "What do we deliver?", "Que proposons-nous dans ce domaine ?")}</h2></header>
       <div>{copy.services.map((service, index) => <article key={service}><span>{String(index + 1).padStart(2, "0")}</span><h3>{service}</h3><i>↗</i></article>)}</div>
     </section>
+
+    {area === "hvacr" && <section className="detail-brands">
+      <header><p className="eyebrow dark"><span /> {l("TEMSİL ETTİĞİMİZ MARKALAR", "BRANDS WE REPRESENT", "MARQUES QUE NOUS REPRÉSENTONS")}</p><h2>{l("Dünya çapında uzman markalar.", "Specialist brands from around the world.", "Des marques spécialisées du monde entier.")}</h2></header>
+      <div>{hvacrBrands.map((brand, index) => <a href="https://www.ventecihaz.com" target="_blank" rel="noreferrer" key={brand.name}><span>{String(index + 1).padStart(2, "0")}</span><strong>{brand.name}</strong><small>{brand[locale]}</small><i>↗</i></a>)}</div>
+    </section>}
 
     <section className="detail-process">
       <p className="eyebrow"><span /> {l("ÇALIŞMA MODELİ", "HOW WE WORK", "NOTRE MÉTHODE")}</p>

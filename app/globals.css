@@ -85,6 +85,7 @@ footer{padding:4rem 6vw 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:
 .detail-services>div{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .detail-services article{position:relative;min-height:15rem;padding:1.6rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .detail-services article span{font-size:.63rem;color:var(--blue)}.detail-services article h3{max-width:18rem;margin:5rem 0 0;font-size:1.45rem;line-height:1.15;letter-spacing:-.035em}.detail-services article i{position:absolute;right:1.5rem;top:1.4rem;color:var(--blue);font-style:normal}
+.detail-brands{padding:8rem 6vw;background:var(--ice)}.detail-brands>header{display:grid;grid-template-columns:.42fr 1.58fr;gap:5vw;margin-bottom:4rem}.detail-brands h2{max-width:68rem;margin:0;font-size:clamp(2.6rem,5vw,5.5rem);line-height:1;letter-spacing:-.06em}.detail-brands>div{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.detail-brands a{position:relative;display:grid;grid-template-columns:3rem 1fr;align-content:center;min-height:9rem;padding:1.5rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.detail-brands a>span{font-size:.63rem;color:var(--blue)}.detail-brands a>strong{font-size:1.25rem;letter-spacing:-.025em}.detail-brands a>small{grid-column:2;margin-top:.55rem;color:var(--muted);font-size:.72rem}.detail-brands a>i{position:absolute;right:1.5rem;top:1.5rem;color:var(--blue);font-style:normal}.detail-brands a:hover{background:#fff}
 .detail-process{padding:8rem 6vw;background:var(--navy);color:#fff}.detail-process h2{max-width:65rem;margin:0;font-size:clamp(3rem,5.7vw,6.3rem);line-height:.95;letter-spacing:-.06em}.detail-process>div{display:grid;grid-template-columns:repeat(4,1fr);margin-top:5rem;border-top:1px solid rgba(255,255,255,.25)}
 .detail-process article{min-height:10rem;padding:1.5rem;border-right:1px solid rgba(255,255,255,.25)}.detail-process article:first-child{border-left:1px solid rgba(255,255,255,.25)}.detail-process article span{display:block;color:#64c3f4;font-size:.63rem}.detail-process article strong{display:block;margin-top:3.5rem;font-size:1rem}
 .detail-cta{padding:8rem 6vw;background:var(--blue);color:#fff}.detail-cta p{margin:0 0 1.5rem;font-size:.72rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase}.detail-cta h2{max-width:72rem;margin:0;font-size:clamp(3rem,6vw,6.8rem);line-height:.95;letter-spacing:-.06em}.detail-cta>a{display:flex;justify-content:space-between;max-width:22rem;margin-top:3rem;padding:1.2rem 0;border-top:1px solid rgba(255,255,255,.7);font-weight:750}
@@ -94,12 +95,12 @@ footer{padding:4rem 6vw 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:
 @media(max-width:900px){
   .detail-nav{grid-template-columns:1fr auto}.detail-back{display:none}
   .detail-hero{min-height:42rem;padding:9rem 1.4rem 4rem}.detail-hero h1{font-size:clamp(3rem,10vw,5.5rem)}
-  .detail-intro,.detail-services>header{grid-template-columns:1fr;gap:1.5rem}.detail-intro,.detail-services,.detail-process,.detail-cta,.detail-other{padding:6rem 1.4rem}
-  .detail-services>div{grid-template-columns:repeat(2,1fr)}.detail-process>div{grid-template-columns:repeat(2,1fr)}.detail-other>div{grid-template-columns:1fr}
+  .detail-intro,.detail-services>header,.detail-brands>header{grid-template-columns:1fr;gap:1.5rem}.detail-intro,.detail-services,.detail-brands,.detail-process,.detail-cta,.detail-other{padding:6rem 1.4rem}
+  .detail-services>div,.detail-brands>div{grid-template-columns:repeat(2,1fr)}.detail-process>div{grid-template-columns:repeat(2,1fr)}.detail-other>div{grid-template-columns:1fr}
   .detail-other a,.detail-other a:first-child{border-left:1px solid var(--line)}
 }
 @media(max-width:560px){
   .detail-nav{left:1rem;right:1rem;padding:0 .75rem}.detail-nav img{width:7.2rem}.detail-nav .language-picker button{padding:.45rem}.detail-nav .language-picker button span{display:none}
-  .detail-hero h1{font-size:clamp(2.7rem,13vw,4.2rem);line-height:1}.detail-services>div,.detail-process>div{grid-template-columns:1fr}
+  .detail-hero h1{font-size:clamp(2.7rem,13vw,4.2rem);line-height:1}.detail-services>div,.detail-brands>div,.detail-process>div{grid-template-columns:1fr}
   .detail-process article,.detail-process article:first-child{border-left:1px solid rgba(255,255,255,.25)}
 }
