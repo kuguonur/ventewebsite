@@ -3,7 +3,12 @@
 import { FormEvent, useEffect, useState } from "react";
 
 type Locale = "tr" | "en";
-const heroSlides = ["/slide-fieldpiece.jpg", "/slide-spin.jpg", "/slide-black-diamond.jpg", "/slide-spectroline.jpg"];
+const heroSlides = [
+  "/hero-hvac-facility.png",
+  "/hero-hvac-diagnostics.png",
+  "/hero-refrigerant-cycle.png",
+  "/hero-global-logistics.png",
+];
 
 const copy = {
   tr: {
