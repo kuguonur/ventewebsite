@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
@@ -10,24 +9,21 @@ const montserrat = Montserrat({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headerList = await headers();
-  const host = headerList.get("x-forwarded-host") ?? headerList.get("host") ?? "vente.com.tr";
-  const protocol = headerList.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
-  const baseUrl = `${protocol}://${host}`;
+  const baseUrl = "https://www.vente.com.tr";
 
   return {
-    title: "Vente | Profesyonel HVAC Teknolojileri",
-    description: "Vente; profesyonel HVAC test ve ölçüm cihazları, soğutma servis ekipmanları ve iklimlendirme teknolojilerini Türkiye ile buluşturur.",
+    title: "Vente | International Trade, Distribution & Business Development",
+    description: "Vente connects products, manufacturers and markets through HVACR distribution, international projects, refrigeration chemicals and regional business development.",
     metadataBase: new URL(baseUrl),
     openGraph: {
-      title: "Vente | Profesyonel HVAC Teknolojileri",
-      description: "HVAC test, ölçüm, servis ve iklimlendirme teknolojileri.",
-      images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: "Vente — Teknolojiyi pazara taşırız" }],
+      title: "Connecting Products. Markets. Opportunities.",
+      description: "International Trade • Distribution • Business Development",
+      images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: "Vente — Connecting Products, Markets and Opportunities" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Vente | Profesyonel HVAC Teknolojileri",
-      description: "HVAC test, ölçüm, servis ve iklimlendirme teknolojileri.",
+      title: "Connecting Products. Markets. Opportunities.",
+      description: "International Trade • Distribution • Business Development",
       images: [`${baseUrl}/og.png`],
     },
   };

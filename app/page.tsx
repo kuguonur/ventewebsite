@@ -1,298 +1,54 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
-const services = [
-  {
-    no: "01",
-    title: "Test & Ölçüm Teknolojileri",
-    text: "HVAC profesyonelleri için dijital manifold, kaçak tespit, vakum, hava debisi ve soğutucu akışkan analiz çözümleri.",
+type Locale = "tr" | "en";
+const heroSlides = ["/slide-fieldpiece.jpg", "/slide-spin.jpg", "/slide-black-diamond.jpg", "/slide-spectroline.jpg"];
+
+const copy = {
+  tr: {
+    nav: ["Vente", "Faaliyet Alanları", "Markalar", "Projeler", "İçgörüler", "İletişim"], eyebrow: "DIŞ TİCARET • DİSTRİBÜTÖRLÜK • İŞ GELİŞTİRME",
+    hero: <>Ürünleri.<br />Üreticileri. <em>Pazarları.</em></>, lead: "Türkiye merkezli bir dış ticaret ve iş geliştirme şirketi olarak doğru ürünleri, güvenilir üreticileri ve yeni pazar fırsatlarını buluşturuyoruz.", discover: "Vente’yi keşfedin", areas: "Faaliyet alanlarımız", what: "NE YAPIYORUZ?", whatTitle: <>Tek yetkinlik.<br />Dört <em>iş alanı.</em></>, whatLead: "Ürün keşfinden dağıtıma, proje tedariğinden yeni pazar yapılanmasına kadar bütünsel ticari çözümler geliştiriyoruz.", tradeTitle: "İhtiyacı siz tanımlayın. Çözümü biz bulalım.", tradeText: "Başta Afrika olmak üzere farklı pazarlardaki müşterilerimiz için ürün araştırması, üretici seçimi, satın alma, konsolidasyon ve ihracat süreçlerini yönetiyoruz.", projectsTitle: <>İhtiyaçtan teslimata.<br /><em>Gerçek projeler.</em></>, brandsTitle: <>Teknoloji üreticileriyle<br /><em>güçlü ortaklıklar.</em></>, brandsText: "HVACR profesyonellerinin işlerini daha hızlı, doğru ve güvenli yapmalarını sağlayan yenilikçi markaları Türkiye pazarıyla buluşturuyoruz.", bdTitle: <>Bölgesel büyüme için<br /><em>yerel partneriniz.</em></>, aboutTitle: <>Yerel bilgi.<br /><em>Uluslararası erişim.</em></>, contactTitle: <>Doğru fırsatı<br /><em>birlikte geliştirelim.</em></>, submit: "Talebinizi gönderin",
   },
-  {
-    no: "02",
-    title: "Servis & Montaj Ekipmanları",
-    text: "Klima ve soğutma servislerine yönelik boru işleme, geri toplama, vakum ve profesyonel montaj ekipmanları.",
+  en: {
+    nav: ["Vente", "Business Areas", "Brands", "Projects", "Insights", "Contact"], eyebrow: "INTERNATIONAL TRADE • DISTRIBUTION • BUSINESS DEVELOPMENT",
+    hero: <>Connecting Products.<br />Markets. <em>Opportunities.</em></>, lead: "Vente is a Türkiye-based international trade and business development company connecting innovative manufacturers, products and markets.", discover: "Discover Vente", areas: "Our business areas", what: "WHAT WE DO", whatTitle: <>One capability.<br />Four <em>business areas.</em></>, whatLead: "From product discovery and distribution to project supply and market development, we build integrated commercial solutions.", tradeTitle: "You define the need. We find the solution.", tradeText: "For clients across Africa and other international markets, we manage sourcing, supplier selection, purchasing, consolidation and export operations.", projectsTitle: <>From need to delivery.<br /><em>Real projects.</em></>, brandsTitle: <>Strong partnerships with<br /><em>technology manufacturers.</em></>, brandsText: "We bring innovative brands that help HVACR professionals work faster, safer and more accurately to the Türkiye market.", bdTitle: <>Your local partner for<br /><em>regional growth.</em></>, aboutTitle: <>Local knowledge.<br /><em>International reach.</em></>, contactTitle: <>Let’s develop the right<br /><em>opportunity together.</em></>, submit: "Send your inquiry",
   },
-  {
-    no: "03",
-    title: "İklimlendirme Sistem Aksesuarları",
-    text: "Bakır borudan kanal ve drenaj çözümlerine kadar HVAC uygulamalarını daha hızlı, güvenli ve verimli hale getiren ürünler.",
-  },
+};
+
+const businessAreas = [
+  { no: "01", tag: "HVACR DISTRIBUTION", title: "Innovative tools for HVACR professionals.", text: "Profesyonel servis ekipmanları ile test ve ölçüm teknolojilerini Türkiye pazarıyla buluşturuyoruz.", action: "Explore HVACR", tone: "blue" },
+  { no: "02", tag: "INTERNATIONAL TRADE & PROJECTS", title: "From sourcing to delivery.", text: "Doğru üreticiden satın alma, konsolidasyon, ihracat ve proje teslimine kadar tüm süreci yönetiyoruz.", action: "Explore Projects", tone: "cobalt" },
+  { no: "03", tag: "CHEMICALS & REFRIGERATION", title: "Specialized solutions for refrigeration.", text: "Vente Kimya ile soğutucu akışkan, kompresör yağı ve profesyonel kimyasal çözümler sunuyoruz.", action: "Discover Vente Kimya", tone: "cyan" },
+  { no: "04", tag: "BUSINESS DEVELOPMENT", title: "Building markets. Developing networks.", text: "Üreticiler için distribütör yapılanması, bayi geliştirme ve bölgesel satış yönetimi gerçekleştiriyoruz.", action: "Business Development", tone: "navy" },
 ];
-
-const brands = ["FIELDPIECE", "SPIN", "NEUTRONICS", "AAB SMART", "TECNO SYSTEMI"];
-
-const productSlides = [
-  {
-    eyebrow: "BORU İŞLEME TEKNOLOJİLERİ",
-    title: "Havşa açma ve boru şişirme",
-    text: "Bakır ve alüminyum borularda hızlı, temiz ve tekrarlanabilir uygulamalar için profesyonel çözümler.",
-    image: "/slide-spin.jpg",
-    brand: "SPIN TOOLS",
-  },
-  {
-    eyebrow: "TEST & ÖLÇÜM CİHAZLARI",
-    title: "HVAC ölçümlerinde tam kontrol",
-    text: "Sahada daha hızlı teşhis, hassas ölçüm ve güvenilir raporlama için profesyonel cihaz ekosistemi.",
-    image: "/slide-fieldpiece.jpg",
-    brand: "FIELDPIECE",
-  },
-  {
-    eyebrow: "PROFESYONEL EL ALETLERİ",
-    title: "Servis ve montajda güçlü ekipman",
-    text: "Boru bükme, kesme ve şekillendirme işlemlerinde HVAC teknisyenleri için dayanıklı el aletleri.",
-    image: "/slide-black-diamond.jpg",
-    brand: "BLACK DIAMOND",
-  },
-  {
-    eyebrow: "KAÇAK TESPİT ÇÖZÜMLERİ",
-    title: "Kaçakları hızlı ve güvenli bulun",
-    text: "Soğutma ve iklimlendirme sistemlerinde servis süresini azaltan profesyonel kaçak tespit teknolojileri.",
-    image: "/slide-spectroline.jpg",
-    brand: "SPECTROLINE",
-  },
+const tradeServices = ["Sourcing", "Central Purchasing", "Supplier Management", "Consolidation", "Export & Logistics", "Turnkey Projects"];
+const projects = [
+  { title: "Truck Weighing Systems", region: "Africa", image: "/slide-black-diamond.jpg", text: "Kamyon kantarlarının sourcing, üretim ve ihracat süreci." },
+  { title: "Container Offices", region: "Africa", image: "/slide-fieldpiece.jpg", text: "Modüler konteyner ofislerin üretim ve teslimatı." },
+  { title: "Steel Hangar Project", region: "Africa", image: "/slide-spin.jpg", text: "Çelik konstrüksiyon hangar tedariği ve kurulumu." },
+  { title: "Workwear Supply", region: "Africa", image: "/slide-spectroline.jpg", text: "Kurumsal iş kıyafetlerinin üretim ve ihracatı." },
 ];
+const brands = [["FIELDPIECE", "USA", "Test & Measurement"], ["WIPCOOL", "China", "HVACR Service Tools"], ["BLACK DIAMOND", "USA", "Professional Tools"], ["SPECTROLINE", "USA", "Leak Detection"], ["WEH", "Germany", "Connection Technology"], ["MSA", "USA", "Safety Technology"], ["SUPERIOR ACCUTRAK", "USA", "Ultrasonic Detection"], ["ACCUTOOLS", "USA", "Refrigerant Tools"], ["REFRIGERATION TECHNOLOGIES", "USA", "HVACR Chemicals"], ["TECNOSYSTEMI", "Italy", "HVAC Accessories"]];
+const bdServices = ["Market Entry", "Distributor Search & Selection", "Distributor Network Development", "Dealer Development", "Regional Sales Management", "Product Launch", "Training", "Exhibitions & Local Marketing", "Market Intelligence"];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [dragX, setDragX] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const systemRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef({ startX: 0, lastX: 0, lastTime: 0, velocity: 0 });
-
-  useEffect(() => {
-    const system = systemRef.current;
-    if (!system || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const onMove = (event: PointerEvent) => {
-      const rect = system.getBoundingClientRect();
-      const x = (event.clientX - (rect.left + rect.width / 2)) * 0.045;
-      const y = (event.clientY - (rect.top + rect.height / 2)) * 0.045;
-      system.animate(
-        { transform: `translate3d(${x}px, ${y}px, 0)` },
-        { duration: 420, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" },
-      );
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, []);
-
-  useEffect(() => {
-    if (dragging) return;
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % productSlides.length);
-    }, 7000);
-    return () => window.clearInterval(timer);
-  }, [dragging]);
-
-  const moveSlide = (direction: number) => {
-    setActiveSlide((current) => (current + direction + productSlides.length) % productSlides.length);
-  };
-
-  const onSliderPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    event.currentTarget.setPointerCapture(event.pointerId);
-    dragRef.current = { startX: event.clientX, lastX: event.clientX, lastTime: performance.now(), velocity: 0 };
-    setDragging(true);
-  };
-
-  const onSliderPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (!dragging) return;
-    const now = performance.now();
-    const elapsed = Math.max(1, now - dragRef.current.lastTime);
-    dragRef.current.velocity = ((event.clientX - dragRef.current.lastX) / elapsed) * 1000;
-    dragRef.current.lastX = event.clientX;
-    dragRef.current.lastTime = now;
-    const raw = event.clientX - dragRef.current.startX;
-    setDragX(raw * (1 / (1 + Math.abs(raw) / 700)));
-  };
-
-  const onSliderPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (!dragging) return;
-    const distance = event.clientX - dragRef.current.startX;
-    const projected = distance + dragRef.current.velocity * 0.18;
-    if (projected < -80) moveSlide(1);
-    if (projected > 80) moveSlide(-1);
-    setDragX(0);
-    setDragging(false);
-  };
-
-  return (
-    <main>
-      <nav className="nav" aria-label="Ana navigasyon">
-        <a className="brand" href="#top" aria-label="Vente ana sayfa">
-          <img src="/vente-logo.jpg" alt="Vente" />
-        </a>
-        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <a href="#uzmanlik" onClick={() => setMenuOpen(false)}>Uzmanlığımız</a>
-          <a href="#markalar" onClick={() => setMenuOpen(false)}>Markalar</a>
-          <a href="#hakkimizda" onClick={() => setMenuOpen(false)}>Hakkımızda</a>
-          <a className="shop-link" href="http://www.ventecihaz.com" target="_blank" rel="noreferrer">Online Shop ↗</a>
-        </div>
-        <button
-          className="menu-button"
-          type="button"
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
-          onClick={() => setMenuOpen((value) => !value)}
-        >
-          <span /><span />
-        </button>
-      </nav>
-
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <p className="eyebrow"><span /> HVAC • SOĞUTMA • İKLİMLENDİRME</p>
-          <h1>HVAC&apos;ın<br />geleceğini <em>taşırız.</em></h1>
-          <p className="hero-lead">
-            Dünyanın yenilikçi HVAC markalarını; doğru teknik bilgi, güçlü dağıtım ağı ve sektör deneyimiyle Türkiye&apos;deki profesyonellerle buluşturuyoruz.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="#iletisim">Birlikte çalışalım <span>↗</span></a>
-            <a className="text-link" href="#uzmanlik">HVAC çözümlerimiz <span>↓</span></a>
-          </div>
-        </div>
-
-        <div className="hero-visual" aria-hidden="true">
-          <div className="hvac-system" ref={systemRef}>
-            <div className="system-grid" />
-            <div className="indoor-unit">
-              <span className="unit-led" />
-              <div className="indoor-vent"><i /><i /><i /><i /><i /></div>
-              <span className="unit-name">İÇ ÜNİTE</span>
-              <div className="cool-air"><i /><i /><i /></div>
-            </div>
-            <div className="outdoor-unit">
-              <div className="fan"><i /><i /><i /></div>
-              <div className="side-vents"><i /><i /><i /><i /></div>
-              <span className="unit-name">DIŞ ÜNİTE</span>
-            </div>
-            <div className="refrigerant-circuit">
-              <div className="pipe liquid-line">
-                <span className="fluid particle-one" /><span className="fluid particle-two" /><span className="fluid particle-three" />
-                <small>SIVI HATTI • YÜKSEK BASINÇ</small>
-              </div>
-              <div className="pipe gas-line">
-                <span className="fluid particle-one" /><span className="fluid particle-two" /><span className="fluid particle-three" />
-                <small>GAZ HATTI • DÜŞÜK BASINÇ</small>
-              </div>
-            </div>
-            <div className="cycle-status"><span /> SOĞUTUCU AKIŞKAN ÇEVRİMİ</div>
-          </div>
-          <div className="metric metric-one"><strong>HVACR</strong><span>Uzmanlık ve<br />saha deneyimi</span></div>
-          <div className="metric metric-two"><strong>360°</strong><span>Teknik ürün<br />portföyü</span></div>
-          <span className="tech-label">EVAPORATION / COMPRESSION / CONDENSATION</span>
-        </div>
-      </section>
-
-      <section className="brand-rail" id="markalar" aria-label="Temsil edilen markalar">
-        <span className="rail-label">GÜVENİLEN TEKNOLOJİLER</span>
-        <div className="brand-list">
-          {brands.map((brand) => <span key={brand}>{brand}</span>)}
-        </div>
-      </section>
-
-      <section className="products-slider" aria-labelledby="products-title">
-        <div className="slider-heading">
-          <div>
-            <p className="eyebrow"><span /> ÜRÜN GRUPLARI</p>
-            <h2 id="products-title">Sahaya özel<br /><em>teknolojiler.</em></h2>
-          </div>
-          <div className="slider-controls">
-            <span>{String(activeSlide + 1).padStart(2, "0")} / {String(productSlides.length).padStart(2, "0")}</span>
-            <button type="button" onClick={() => moveSlide(-1)} aria-label="Önceki ürün grubu">←</button>
-            <button type="button" onClick={() => moveSlide(1)} aria-label="Sonraki ürün grubu">→</button>
-          </div>
-        </div>
-        <div
-          className={`slider-viewport ${dragging ? "dragging" : ""}`}
-          onPointerDown={onSliderPointerDown}
-          onPointerMove={onSliderPointerMove}
-          onPointerUp={onSliderPointerUp}
-          onPointerCancel={onSliderPointerUp}
-        >
-          <div
-            className="slider-track"
-            style={{
-              width: `${productSlides.length * 100}%`,
-              transform: `translate3d(calc(${-activeSlide * (100 / productSlides.length)}% + ${dragX}px), 0, 0)`,
-            }}
-          >
-            {productSlides.map((slide, index) => (
-              <article className="product-slide" style={{ width: `${100 / productSlides.length}%` }} key={slide.title} aria-hidden={activeSlide !== index}>
-                <img src={slide.image} alt="" draggable={false} />
-                <div className="slide-shade" />
-                <div className="slide-copy">
-                  <span className="slide-brand">{slide.brand}</span>
-                  <p>{slide.eyebrow}</p>
-                  <h3>{slide.title}</h3>
-                  <div className="slide-bottom">
-                    <span>{slide.text}</span>
-                    <a href="#iletisim" tabIndex={activeSlide === index ? 0 : -1}>Ürün grubunu inceleyin ↗</a>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-        <div className="slider-dots" aria-label="Ürün grubu slaytları">
-          {productSlides.map((slide, index) => (
-            <button key={slide.title} type="button" className={activeSlide === index ? "active" : ""} onClick={() => setActiveSlide(index)} aria-label={`${index + 1}. slayta git`} />
-          ))}
-        </div>
-      </section>
-
-      <section className="services" id="uzmanlik">
-        <div className="section-intro">
-          <p className="eyebrow dark"><span /> UZMANLIĞIMIZ</p>
-          <h2>HVAC sahasında<br />profesyonel <em>çözümler.</em></h2>
-          <p>Ölçümden montaja, servisten devreye almaya kadar profesyonellerin ihtiyaç duyduğu teknoloji.</p>
-        </div>
-        <div className="service-grid">
-          {services.map((service) => (
-            <article className="service-card" key={service.no}>
-              <span className="service-no">{service.no}</span>
-              <div className="service-symbol" aria-hidden="true"><i /><i /></div>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-              <a href="#iletisim" aria-label={`${service.title} hakkında konuşalım`}>Detayları konuşalım <span>↗</span></a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="about" id="hakkimizda">
-        <div className="about-index">VENTE / HVACR</div>
-        <div>
-          <p className="eyebrow"><span /> BİZ KİMİZ?</p>
-          <h2>HVAC&apos;ta yerel deneyim.<br />Global teknoloji.</h2>
-        </div>
-        <div className="about-copy">
-          <p>Vente Dış Ticaret Danışmanlık AŞ; ısıtma, soğutma, havalandırma ve iklimlendirme sektörünün profesyonel test, ölçüm, servis ve montaj teknolojilerini Türkiye pazarıyla buluşturur.</p>
-          <p>HVACR sektöründeki saha deneyimimizle yalnızca ürün tedarik etmiyor; doğru cihaz seçimi, teknik uygulama bilgisi ve satış sonrası süreçlerde kalıcı değer üretiyoruz.</p>
-        </div>
-      </section>
-
-      <section className="contact" id="iletisim">
-        <p className="eyebrow dark"><span /> HVAC İHTİYACINIZI KONUŞALIM</p>
-        <h2>Doğru ekipmanı<br /><em>birlikte seçelim.</em></h2>
-        <div className="contact-row">
-          <a className="contact-mail" href="mailto:info@vente.com.tr">info@vente.com.tr <span>↗</span></a>
-          <p>Ölçüm, servis, montaj veya iklimlendirme uygulamanız için en uygun profesyonel çözüme birlikte karar verelim.</p>
-        </div>
-      </section>
-
-      <footer>
-        <a className="brand footer-brand" href="#top"><img src="/vente-logo.jpg" alt="Vente" /></a>
-        <p>HVAC Teknolojileri ve Profesyonel Ekipmanlar</p>
-        <div className="socials">
-          <a href="https://www.linkedin.com/company/vente-technology-&-consulting-services" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a href="https://www.instagram.com/vente_tech/" target="_blank" rel="noreferrer">Instagram ↗</a>
-          <a href="https://www.youtube.com/channel/UCuAt0fQvG1uaTE_OzNLWjsg" target="_blank" rel="noreferrer">YouTube ↗</a>
-        </div>
-        <small>© {new Date().getFullYear()} Vente Dış Ticaret Danışmanlık AŞ</small>
-      </footer>
-    </main>
-  );
+  const [locale, setLocale] = useState<Locale>("tr"); const [menuOpen, setMenuOpen] = useState(false); const [heroSlide, setHeroSlide] = useState(0); const [brandOpen, setBrandOpen] = useState<number | null>(null); const [sent, setSent] = useState(false); const t = copy[locale];
+  useEffect(() => { const timer = window.setInterval(() => setHeroSlide((slide) => (slide + 1) % heroSlides.length), 5600); return () => window.clearInterval(timer); }, []);
+  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSent(true); };
+  return <main>
+    <nav className="nav" aria-label="Ana navigasyon"><a className="brand" href="#top" aria-label="Vente ana sayfa"><img src="/vente-logo.jpg" alt="Vente" /></a><div className={`nav-links ${menuOpen ? "open" : ""}`}><a href="#hakkimizda">{t.nav[0]}</a><a href="#uzmanlik">{t.nav[1]}</a><a href="#markalar">{t.nav[2]}</a><a href="#projeler">{t.nav[3]}</a><a href="#insights">{t.nav[4]}</a><a href="#iletisim">{t.nav[5]}</a><button className="lang-switch" type="button" onClick={() => setLocale(locale === "tr" ? "en" : "tr")}>{locale === "tr" ? "EN" : "TR"}</button><a className="shop-link" href="https://www.ventecihaz.com" target="_blank" rel="noreferrer" data-track="online-shop">Online Shop ↗</a></div><button className="menu-button" type="button" aria-expanded={menuOpen} aria-label="Menü" onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button></nav>
+    <section className="hero hero-new" id="top"><div className="hero-media" aria-hidden="true">{heroSlides.map((image, index) => <img key={image} src={image} alt="" className={heroSlide === index ? "active" : ""} />)}<div className="hero-overlay" /></div><div className="hero-copy"><p className="eyebrow"><span /> {t.eyebrow}</p><h1>{t.hero}</h1><p className="hero-lead">{t.lead}</p><div className="hero-actions"><a className="primary-button" href="#hakkimizda">{t.discover} <span>↗</span></a><a className="text-link" href="#uzmanlik">{t.areas} <span>↓</span></a></div></div><div className="hero-pagination">{heroSlides.map((_, index) => <button key={index} className={heroSlide === index ? "active" : ""} onClick={() => setHeroSlide(index)} aria-label={`${index + 1}. görsel`} />)}</div></section>
+    <section className="manifesto"><span>FINDING THE RIGHT PRODUCT.</span><span>BUILDING THE RIGHT PARTNERSHIP.</span><span>CONNECTING IT WITH THE RIGHT MARKET.</span></section>
+    <section className="business" id="uzmanlik"><header className="section-head"><p className="eyebrow dark"><span /> {t.what}</p><h2>{t.whatTitle}</h2><p>{t.whatLead}</p></header><div className="business-grid">{businessAreas.map((area) => <article className={`business-card ${area.tone}`} key={area.no}><div><span>{area.no}</span><small>{area.tag}</small></div><h3>{area.title}</h3><p>{area.text}</p><a href={`#area-${area.no}`}>{area.action} <span>↗</span></a></article>)}</div></section>
+    <section className="trade" id="area-02"><div className="trade-copy"><p className="eyebrow dark"><span /> INTERNATIONAL TRADE & PROJECTS</p><h2>{t.tradeTitle}</h2><p>{t.tradeText}</p><a className="primary-button" href="#iletisim">Start a project <span>↗</span></a></div><div className="service-list">{tradeServices.map((service, index) => <div key={service}><span>{String(index + 1).padStart(2, "0")}</span><strong>{service}</strong><i>↗</i></div>)}</div></section>
+    <section className="projects" id="projeler"><header className="section-head compact"><p className="eyebrow dark"><span /> PROJECTS / REFERENCES</p><h2>{t.projectsTitle}</h2><p>Sourcing, production, logistics and delivery—managed as one connected process.</p></header><div className="project-grid">{projects.map((project, index) => <article className="project-card" key={project.title}><div className="project-image"><img src={project.image} alt="" /><span>{String(index + 1).padStart(2, "0")}</span></div><small>{project.region}</small><h3>{project.title}</h3><p>{project.text}</p><a href="#iletisim">View case study ↗</a></article>)}</div><p className="asset-note">Proje görselleri örnek yer tutuculardır; gerçek saha fotoğraflarıyla değiştirilmeye hazırdır.</p></section>
+    <section className="chemicals" id="area-03"><div className="chemical-mark"><span>VENTE</span><strong>KİMYA</strong></div><div className="chemical-copy"><p className="eyebrow"><span /> CHEMICALS & REFRIGERATION</p><h2>Chemicals for the HVACR Industry.</h2><p>Soğutma sektörüne yönelik uzman ürünleri, güvenilir tedarik yapısı ve teknik pazar bilgisiyle buluşturuyoruz.</p></div><div className="chemical-categories"><div><span>01</span><h3>Refrigerant Gases</h3><p>GeneralGas ürünlerinin Türkiye distribütörlüğü.</p></div><div><span>02</span><h3>Compressor Oils</h3><p>POE ve PAG kompresör yağları.</p></div><div><span>03</span><h3>HVACR Chemicals</h3><p>Servis ve bakım için profesyonel çözümler.</p></div></div></section>
+    <section className="brands" id="markalar"><header className="section-head compact"><p className="eyebrow dark"><span /> HVACR DISTRIBUTION</p><h2>{t.brandsTitle}</h2><p>{t.brandsText}</p></header><div className="brand-grid">{brands.map((brand, index) => <button key={brand[0]} className={brandOpen === index ? "open" : ""} onClick={() => setBrandOpen(brandOpen === index ? null : index)}><strong>{brand[0]}</strong><span>{brand[1]} · {brand[2]}</span><i>{brandOpen === index ? "−" : "+"}</i>{brandOpen === index && <p>Profesyonel HVACR uygulamalarına yönelik yenilikçi çözümler. Ürünler ventecihaz.com üzerinden incelenebilir.</p>}</button>)}</div><a className="primary-button brands-cta" href="https://www.ventecihaz.com" target="_blank" rel="noreferrer" data-track="shop-products">Ürünleri ventecihaz.com’da inceleyin <span>↗</span></a></section>
+    <section className="development" id="area-04"><div className="development-intro"><p className="eyebrow"><span /> INTERNATIONAL BUSINESS DEVELOPMENT</p><h2>{t.bdTitle}</h2><p>Vente, uluslararası üreticilerin Türkiye, Doğu Avrupa ve Orta Doğu pazarlarındaki büyüme süreçlerinde satış ve kanal geliştirme partneri olarak görev alır.</p></div><div className="bd-tags">{bdServices.map((item) => <span key={item}>{item}</span>)}</div><article className="fieldpiece-case"><div><small>FIELDPIECE INSTRUMENTS</small><h3>Regional Business Development</h3></div><p>Türkiye, Doğu Avrupa ve Orta Doğu bölgelerinde distribütör ve bayi yapılanması, kanal geliştirme ve yerel pazar faaliyetleri.</p><a href="#iletisim">Become our regional partner ↗</a></article></section>
+    <section className="about-new" id="hakkimizda"><div><p className="eyebrow dark"><span /> ABOUT VENTE</p><h2>{t.aboutTitle}</h2></div><div className="about-story"><p>Vente; dış ticaret tecrübesini, HVACR uzmanlığını ve uluslararası pazar bilgisini tek organizasyonda birleştirir.</p><p>Doğru ürünü bulur, doğru ortaklığı kurar ve doğru pazarla buluştururuz.</p></div><div className="stats"><div><strong>2015</strong><span>Founded</span></div><div><strong>10+</strong><span>Years of Experience</span></div><div><strong>4</strong><span>Business Areas</span></div><div><strong>10+</strong><span>International Brands</span></div></div></section>
+    <section className="insights" id="insights"><p className="eyebrow dark"><span /> NEWS & INSIGHTS</p><div className="insight-row"><article><small>MARKET INSIGHT</small><h3>Yeni pazarlara girişte doğru distribütör yapısı</h3><a href="#iletisim">Read insight ↗</a></article><article><small>HVACR TECHNOLOGY</small><h3>Profesyonel ölçüm teknolojilerinde dönüşüm</h3><a href="#iletisim">Read insight ↗</a></article><article><small>PROJECT UPDATE</small><h3>Afrika projelerinde merkezi satın alma modeli</h3><a href="#iletisim">Read insight ↗</a></article></div></section>
+    <section className="contact-new" id="iletisim"><div className="contact-intro"><p className="eyebrow dark"><span /> BUSINESS INQUIRY</p><h2>{t.contactTitle}</h2><p>info@vente.com.tr<br />İstanbul, Türkiye</p></div><form onSubmit={submit}>{sent ? <div className="form-success"><span>✓</span><h3>Talebiniz alındı.</h3><p>Ekibimiz en kısa sürede sizinle iletişime geçecek.</p><button type="button" onClick={() => setSent(false)}>Yeni talep oluşturun</button></div> : <><fieldset><legend>How can we help you?</legend><div className="inquiry-options">{["HVACR Products", "Become a Dealer", "International Sourcing", "Project Inquiry", "Vente Kimya", "Manufacturer / Market Entry", "Other"].map((option) => <label key={option}><input required type="radio" name="inquiry" value={option} /><span>{option}</span></label>)}</div></fieldset><div className="form-grid"><label>Name<input required name="name" /></label><label>Company<input required name="company" /></label><label>Country<select required name="country" defaultValue=""><option value="" disabled>Select country</option><option>Türkiye</option><option>Germany</option><option>Italy</option><option>United Kingdom</option><option>United Arab Emirates</option><option>South Africa</option><option>Nigeria</option><option>Ghana</option><option>Other</option></select></label><label>Email<input required type="email" name="email" /></label><label>Phone<input type="tel" name="phone" /></label><label className="full">Message<textarea required name="message" rows={4} /></label></div><label className="consent"><input required type="checkbox" /> <span>KVKK / GDPR kapsamında iletişim bilgilerimin işlenmesini kabul ediyorum.</span></label><button className="form-submit" type="submit">{t.submit} <span>↗</span></button></>}</form></section>
+    <footer><a className="brand footer-brand" href="#top"><img src="/vente-logo.jpg" alt="Vente" /></a><p>Connecting products, manufacturers and markets.</p><div className="socials"><a href="https://www.linkedin.com/company/vente-technology-&-consulting-services" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://www.instagram.com/vente_tech/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.youtube.com/channel/UCuAt0fQvG1uaTE_OzNLWjsg" target="_blank" rel="noreferrer">YouTube ↗</a></div><small>© {new Date().getFullYear()} Vente Dış Ticaret Danışmanlık AŞ · KVKK · Privacy</small></footer>
+  </main>;
 }
