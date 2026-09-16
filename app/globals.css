@@ -77,9 +77,10 @@ footer{padding:4rem 6vw 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:
 .detail-hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,24,35,.94),rgba(7,24,35,.72) 48%,rgba(7,24,35,.12)),linear-gradient(0deg,rgba(7,24,35,.7),transparent 50%)}
 .detail-hero-copy{position:relative;z-index:1;max-width:74rem}
 .detail-hero-copy>p{display:flex;align-items:center;gap:1rem;margin:0 0 2rem;font-size:.67rem;font-weight:750;letter-spacing:.14em}.detail-hero-copy>p span{display:grid;place-items:center;width:2.5rem;height:2.5rem;border:1px solid rgba(255,255,255,.5);border-radius:50%}
-.detail-hero h1{max-width:68rem;margin:0;font-size:clamp(3.8rem,7vw,7.4rem);line-height:.92;letter-spacing:-.065em}
+.detail-hero h1{max-width:68rem;margin:0;font-size:clamp(3.6rem,6.6vw,7rem);line-height:1.06;letter-spacing:-.05em;text-wrap:balance}
 .detail-hero strong{display:block;max-width:47rem;margin-top:2rem;color:#dceaf2;font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.65;font-weight:500}
 .detail-intro{padding:8rem 6vw;display:grid;grid-template-columns:.42fr 1.58fr;gap:5vw;align-items:start;border-bottom:1px solid var(--line)}
+.detail-intro .eyebrow,.detail-services .eyebrow,.detail-brands .eyebrow{font-size:clamp(.82rem,.9vw,1rem);line-height:1.4;letter-spacing:.12em}.detail-intro .eyebrow span,.detail-services .eyebrow span,.detail-brands .eyebrow span{width:.62rem;height:.62rem;flex:0 0 auto}
 .detail-intro h2{max-width:72rem;margin:0;font-size:clamp(2.2rem,4.2vw,4.8rem);line-height:1.08;letter-spacing:-.055em;font-weight:500}
 .detail-services{padding:8rem 6vw}.detail-services>header{display:grid;grid-template-columns:.42fr 1.58fr;gap:5vw;margin-bottom:4rem}.detail-services h2{margin:0;font-size:clamp(2.6rem,5vw,5.5rem);line-height:1;letter-spacing:-.06em}
 .detail-services>div{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
@@ -94,13 +95,13 @@ footer{padding:4rem 6vw 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:
 
 @media(max-width:900px){
   .detail-nav{grid-template-columns:1fr auto}.detail-back{display:none}
-  .detail-hero{min-height:42rem;padding:9rem 1.4rem 4rem}.detail-hero h1{font-size:clamp(3rem,10vw,5.5rem)}
+  .detail-hero{min-height:42rem;padding:9rem 1.4rem 4rem}.detail-hero h1{font-size:clamp(3rem,9vw,5.15rem);line-height:1.08}
   .detail-intro,.detail-services>header,.detail-brands>header{grid-template-columns:1fr;gap:1.5rem}.detail-intro,.detail-services,.detail-brands,.detail-process,.detail-cta,.detail-other{padding:6rem 1.4rem}
   .detail-services>div,.detail-brands>div{grid-template-columns:repeat(2,1fr)}.detail-process>div{grid-template-columns:repeat(2,1fr)}.detail-other>div{grid-template-columns:1fr}
   .detail-other a,.detail-other a:first-child{border-left:1px solid var(--line)}
 }
 @media(max-width:560px){
   .detail-nav{left:1rem;right:1rem;padding:0 .75rem}.detail-nav img{width:7.2rem}.detail-nav .language-picker button{padding:.45rem}.detail-nav .language-picker button span{display:none}
-  .detail-hero h1{font-size:clamp(2.7rem,13vw,4.2rem);line-height:1}.detail-services>div,.detail-brands>div,.detail-process>div{grid-template-columns:1fr}
+  .detail-hero h1{font-size:clamp(2.55rem,12vw,3.9rem);line-height:1.1;letter-spacing:-.04em}.detail-services>div,.detail-brands>div,.detail-process>div{grid-template-columns:1fr}
   .detail-process article,.detail-process article:first-child{border-left:1px solid rgba(255,255,255,.25)}
 }
