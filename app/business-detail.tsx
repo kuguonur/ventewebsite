@@ -13,16 +13,16 @@ const routes: Record<BusinessArea, string> = {
 };
 
 const hvacrBrands = [
-  { name: "FIELDPIECE", tr: "Test ve ölçüm", en: "Test & measurement", fr: "Test et mesure" },
-  { name: "WIPCOOL", tr: "HVACR servis ekipmanları", en: "HVACR service equipment", fr: "Équipements de service HVACR" },
-  { name: "BLACK DIAMOND", tr: "Profesyonel el aletleri", en: "Professional hand tools", fr: "Outillage professionnel" },
-  { name: "SPECTROLINE", tr: "Kaçak tespit teknolojileri", en: "Leak detection technologies", fr: "Technologies de détection des fuites" },
-  { name: "WEH", tr: "Bağlantı teknolojileri", en: "Connection technologies", fr: "Technologies de raccordement" },
-  { name: "MSA", tr: "Güvenlik teknolojileri", en: "Safety technologies", fr: "Technologies de sécurité" },
-  { name: "SUPERIOR ACCUTRAK", tr: "Ultrasonik tespit", en: "Ultrasonic detection", fr: "Détection ultrasonique" },
-  { name: "ACCUTOOLS", tr: "Profesyonel servis ekipmanları", en: "Professional service equipment", fr: "Équipements de service professionnels" },
-  { name: "REFRIGERATION TECHNOLOGIES", tr: "HVACR bakım kimyasalları", en: "HVACR maintenance chemicals", fr: "Produits chimiques de maintenance HVACR" },
-  { name: "TECNOSYSTEMI", tr: "HVAC aksesuarları", en: "HVAC accessories", fr: "Accessoires HVAC" },
+  { name: "FIELDPIECE", href: "https://www.ventecihaz.com/marka/fieldpiece", tr: "Test ve ölçüm", en: "Test & measurement", fr: "Test et mesure" },
+  { name: "WIPCOOL", href: "https://www.ventecihaz.com/marka/wipcool", tr: "HVACR servis ekipmanları", en: "HVACR service equipment", fr: "Équipements de service HVACR" },
+  { name: "BLACK DIAMOND", href: "https://www.ventecihaz.com/marka/black-diamond", tr: "Profesyonel el aletleri", en: "Professional hand tools", fr: "Outillage professionnel" },
+  { name: "SPECTROLINE", href: "https://www.ventecihaz.com/marka/spectroline", tr: "Kaçak tespit teknolojileri", en: "Leak detection technologies", fr: "Technologies de détection des fuites" },
+  { name: "WEH", href: "https://www.ventecihaz.com/marka/weh", tr: "Bağlantı teknolojileri", en: "Connection technologies", fr: "Technologies de raccordement" },
+  { name: "MSA", href: "https://www.ventecihaz.com/marka/msa", tr: "Güvenlik teknolojileri", en: "Safety technologies", fr: "Technologies de sécurité" },
+  { name: "SUPERIOR ACCUTRAK", href: "https://www.ventecihaz.com/marka/accutrak", tr: "Ultrasonik tespit", en: "Ultrasonic detection", fr: "Détection ultrasonique" },
+  { name: "ACCUTOOLS", href: "https://www.ventecihaz.com/marka/accutools", tr: "Profesyonel servis ekipmanları", en: "Professional service equipment", fr: "Équipements de service professionnels" },
+  { name: "REFRIGERATION TECHNOLOGIES", href: "https://www.ventecihaz.com/marka/refrigeration-technologies", tr: "HVACR bakım kimyasalları", en: "HVACR maintenance chemicals", fr: "Produits chimiques de maintenance HVACR" },
+  { name: "TECNOSYSTEMI", href: "https://www.ventecihaz.com/marka/tecnosystemi", tr: "HVAC aksesuarları", en: "HVAC accessories", fr: "Accessoires HVAC" },
 ] as const;
 
 const content = {
@@ -198,7 +198,7 @@ export default function BusinessDetail({ area }: { area: BusinessArea }) {
 
     {area === "hvacr" && <section className="detail-brands">
       <header><p className="eyebrow dark"><span /> {l("TEMSİL ETTİĞİMİZ MARKALAR", "BRANDS WE REPRESENT", "MARQUES QUE NOUS REPRÉSENTONS")}</p><h2>{l("Dünya çapında uzman markalar.", "Specialist brands from around the world.", "Des marques spécialisées du monde entier.")}</h2></header>
-      <div>{hvacrBrands.map((brand, index) => <a href="https://www.ventecihaz.com" target="_blank" rel="noreferrer" key={brand.name}><span>{String(index + 1).padStart(2, "0")}</span><strong>{brand.name}</strong><small>{brand[locale]}</small><i>↗</i></a>)}</div>
+      <div>{hvacrBrands.map((brand, index) => <a href={brand.href} target="_blank" rel="noreferrer" key={brand.name}><span>{String(index + 1).padStart(2, "0")}</span><strong>{brand.name}</strong><small>{brand[locale]}</small><i>↗</i></a>)}</div>
     </section>}
 
     <section className="detail-process">
