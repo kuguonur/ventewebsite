@@ -30,7 +30,7 @@ const content = {
     no: "01",
     image: "/hero-hvac-diagnostics.png",
     tr: {
-      label: "VENTE HVAC-R SERVİS EKİPMANLARI",
+      label: "HVACR DİSTRİBÜTÖRLÜĞÜ",
       title: "HVACR profesyonelleri için yenilikçi ekipmanlar.",
       lead: "Dünyanın önde gelen teknoloji üreticilerini Türkiye’deki HVACR profesyonelleriyle buluşturuyoruz.",
       intro: "Servis, devreye alma, test ve ölçüm süreçlerinde hız, doğruluk ve güvenlik sağlayan profesyonel çözümler sunuyoruz. Güçlü teknik pazar bilgimizle doğru ürünü doğru kullanıcıya ulaştırıyoruz.",
@@ -39,7 +39,7 @@ const content = {
       cta: "HVACR ürünlerini inceleyin",
     },
     en: {
-      label: "VENTE HVAC-R SERVICE EQUIPMENT",
+      label: "HVACR DISTRIBUTION",
       title: "Innovative tools for HVACR professionals.",
       lead: "We connect leading global technology manufacturers with HVACR professionals across Türkiye.",
       intro: "We deliver professional solutions that improve speed, accuracy and safety in service, commissioning, testing and measurement. Our technical market expertise connects the right product with the right user.",
@@ -48,7 +48,7 @@ const content = {
       cta: "Explore HVACR products",
     },
     fr: {
-      label: "VENTE ÉQUIPEMENTS DE SERVICE HVAC-R",
+      label: "DISTRIBUTION HVACR",
       title: "Des équipements innovants pour les professionnels du HVACR.",
       lead: "Nous mettons en relation les principaux fabricants mondiaux de technologies avec les professionnels du HVACR en Türkiye.",
       intro: "Nous proposons des solutions professionnelles qui améliorent la rapidité, la précision et la sécurité lors des opérations de maintenance, de mise en service, de test et de mesure. Notre expertise du marché technique relie le bon produit au bon utilisateur.",
@@ -61,7 +61,7 @@ const content = {
     no: "03",
     image: "/hero-global-logistics.png",
     tr: {
-      label: "VENTE DIŞ TİCARET / İHRACAT",
+      label: "ULUSLARARASI TİCARET VE PROJELER",
       title: "Ürün araştırmasından teslimata.",
       lead: "İhtiyacı tanımlıyor, doğru üreticiyi buluyor ve tüm ticari süreci tek merkezden yönetiyoruz.",
       intro: "Başta Afrika olmak üzere uluslararası pazarlardaki müşterilerimiz için ürün araştırması, satın alma, üretim takibi, konsolidasyon, ihracat ve proje teslimini uçtan uca koordine ediyoruz.",
@@ -70,7 +70,7 @@ const content = {
       cta: "Projenizi görüşelim",
     },
     en: {
-      label: "VENTE FOREIGN TRADE / EXPORTS",
+      label: "INTERNATIONAL TRADE & PROJECTS",
       title: "From sourcing to delivery.",
       lead: "We define the need, identify the right manufacturer and manage the complete commercial process from one point.",
       intro: "For customers across Africa and other international markets, we coordinate sourcing, purchasing, production follow-up, consolidation, export and project delivery from end to end.",
@@ -79,7 +79,7 @@ const content = {
       cta: "Discuss your project",
     },
     fr: {
-      label: "VENTE COMMERCE EXTÉRIEUR / EXPORTATION",
+      label: "COMMERCE INTERNATIONAL ET PROJETS",
       title: "De la recherche produit à la livraison.",
       lead: "Nous définissons le besoin, identifions le bon fabricant et gérons l’ensemble du processus commercial depuis un point unique.",
       intro: "Pour nos clients en Afrique et sur d’autres marchés internationaux, nous coordonnons de bout en bout la recherche de fournisseurs, les achats, le suivi de production, la consolidation, l’exportation et la livraison des projets.",
@@ -92,7 +92,7 @@ const content = {
     no: "02",
     image: "/hero-hvac-facility.png",
     tr: {
-      label: "VENTE KİMYA / YAĞ İTHALATI",
+      label: "KİMYASALLAR VE SOĞUTMA",
       title: "Soğutma sektörü için uzman çözümler.",
       lead: "Vente Kimya ile profesyonel soğutma uygulamalarına yönelik güvenilir ürünler sunuyoruz.",
       intro: "Kompresör yağları, sistem temizleme ürünleri ve profesyonel bakım kimyasallarından oluşan ürün grubumuzu teknik bilgi, güvenilir tedarik ve doğru uygulama desteğiyle birleştiriyoruz.",
@@ -101,7 +101,7 @@ const content = {
       cta: "Vente Kimya ile görüşün",
     },
     en: {
-      label: "VENTE CHEMICALS / OIL IMPORTS",
+      label: "CHEMICALS & REFRIGERATION",
       title: "Specialized solutions for refrigeration.",
       lead: "Through Vente Kimya, we provide reliable products for professional refrigeration applications.",
       intro: "We combine compressor oils, system cleaning products and professional maintenance chemicals with technical expertise, dependable supply and application support.",
@@ -110,7 +110,7 @@ const content = {
       cta: "Contact Vente Kimya",
     },
     fr: {
-      label: "VENTE CHIMIE / IMPORTATION D’HUILES",
+      label: "PRODUITS CHIMIQUES ET RÉFRIGÉRATION",
       title: "Des solutions spécialisées pour la réfrigération.",
       lead: "Avec Vente Kimya, nous fournissons des produits fiables pour les applications professionnelles de réfrigération.",
       intro: "Nous associons les huiles pour compresseurs, les produits de nettoyage des systèmes et les produits chimiques de maintenance à une expertise technique, un approvisionnement fiable et une assistance à l’application.",
@@ -123,7 +123,7 @@ const content = {
     no: "04",
     image: "/hero-hvac-facility.png",
     tr: {
-      label: "VENTE DIŞ TİCARET / DANIŞMANLIK",
+      label: "ULUSLARARASI İŞ GELİŞTİRME",
       title: "Pazarlar kuruyor, ağlar geliştiriyoruz.",
       lead: "Uluslararası üreticilerin Türkiye ve çevre pazarlardaki büyüme süreçlerine yerel uzmanlık kazandırıyoruz.",
       intro: "Üreticiler için pazar analizi, distribütör ve bayi yapılanması, bölgesel satış yönetimi, ürün lansmanı ve yerel pazarlama faaliyetlerini tek bir büyüme modeli altında yönetiyoruz.",
@@ -132,7 +132,7 @@ const content = {
       cta: "Yeni pazarı birlikte geliştirelim",
     },
     en: {
-      label: "VENTE FOREIGN TRADE / CONSULTING",
+      label: "INTERNATIONAL BUSINESS DEVELOPMENT",
       title: "Building markets. Developing networks.",
       lead: "We bring local expertise to the growth journey of international manufacturers in Türkiye and surrounding markets.",
       intro: "For manufacturers, we manage market analysis, distributor and dealer structuring, regional sales, product launches and local marketing under one integrated growth model.",
@@ -141,7 +141,7 @@ const content = {
       cta: "Build your next market with us",
     },
     fr: {
-      label: "VENTE COMMERCE EXTÉRIEUR / CONSEIL",
+      label: "DÉVELOPPEMENT COMMERCIAL INTERNATIONAL",
       title: "Nous créons des marchés et développons des réseaux.",
       lead: "Nous apportons une expertise locale à la croissance des fabricants internationaux en Türkiye et sur les marchés voisins.",
       intro: "Pour les fabricants, nous gérons l’analyse de marché, la structuration des distributeurs et revendeurs, les ventes régionales, les lancements de produits et le marketing local dans un modèle de croissance intégré.",
