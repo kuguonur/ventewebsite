@@ -34,7 +34,6 @@ const businessAreaImages = ["/business-hvacr.jpg", "/business-chemicals.jpg", "/
 const hvacrProductImages = [
   "/hvacr-product-manifold.png",
   "/hvacr-product-fieldpiece-pump-front.png",
-  "/hvacr-product-fieldpiece-pump-side.png",
   "/hvacr-product-wipcool-pump.png",
   "/hvacr-product-drain-pump.png",
   "/hvacr-product-scale.png",
