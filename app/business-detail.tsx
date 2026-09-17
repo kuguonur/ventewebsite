@@ -25,6 +25,11 @@ const hvacrBrands = [
   { name: "TECNOSYSTEMI", href: "https://www.ventecihaz.com/marka/tecnosystemi", tr: "HVAC aksesuarları", en: "HVAC accessories", fr: "Accessoires HVAC" },
 ] as const;
 
+const hvacrBrandLogos = [
+  "/brand-fieldpiece.png", "/brand-wipcool.png", "/brand-black-diamond.png", "/brand-spectroline.png", "/brand-weh.png",
+  "/brand-msa.png", "/brand-superior-accutrak.png", "/brand-accutools.png", "/brand-refrigeration-technologies.png", "/brand-tecnosystemi.png",
+];
+
 const content = {
   hvacr: {
     no: "01",
@@ -198,7 +203,7 @@ export default function BusinessDetail({ area }: { area: BusinessArea }) {
 
     {area === "hvacr" && <section className="detail-brands">
       <header><p className="eyebrow dark"><span /> {l("TEMSİL ETTİĞİMİZ MARKALAR", "BRANDS WE REPRESENT", "MARQUES QUE NOUS REPRÉSENTONS")}</p><h2>{l("Dünya çapında uzman markalar.", "Specialist brands from around the world.", "Des marques spécialisées du monde entier.")}</h2></header>
-      <div>{hvacrBrands.map((brand, index) => <a href={brand.href} target="_blank" rel="noreferrer" key={brand.name}><span>{String(index + 1).padStart(2, "0")}</span><strong>{brand.name}</strong><small>{brand[locale]}</small><i>↗</i></a>)}</div>
+      <div>{hvacrBrands.map((brand, index) => <a href={brand.href} target="_blank" rel="noreferrer" key={brand.name}><span>{String(index + 1).padStart(2, "0")}</span><span className={`detail-brand-logo ${index === 1 || index === 2 ? "dark" : ""}`}><img src={hvacrBrandLogos[index]} alt={`${brand.name} logo`} /></span><span className="detail-brand-copy"><strong>{brand.name}</strong><small>{brand[locale]}</small></span><i>↗</i></a>)}</div>
     </section>}
 
     <section className="detail-process">
