@@ -105,3 +105,12 @@ footer{padding:4rem 6vw 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:
   .detail-hero h1{font-size:clamp(2.55rem,12vw,3.9rem);line-height:1.1;letter-spacing:-.04em}.detail-services>div,.detail-brands>div,.detail-process>div{grid-template-columns:1fr}
   .detail-process article,.detail-process article:first-child{border-left:1px solid rgba(255,255,255,.25)}
 }
+
+/* Business-area imagery */
+.business-card{position:relative;isolation:isolate;overflow:hidden;transition:color .25s}
+.business-card::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.99) 0%,rgba(255,255,255,.96) 43%,rgba(255,255,255,.58) 70%,rgba(255,255,255,.12) 100%);transition:background .35s}
+.business-card-image{position:absolute;z-index:-2;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .65s ease}
+.business-card h3{max-width:25rem}.business-card p{max-width:30rem}
+.business-card:hover{color:#fff}.business-card:hover::before{background:linear-gradient(90deg,rgba(32,136,208,.97),rgba(32,136,208,.82) 58%,rgba(32,136,208,.38))}.business-card:hover .business-card-image{transform:scale(1.035)}
+.business-card.cobalt:hover::before{background:linear-gradient(90deg,rgba(38,85,160,.97),rgba(38,85,160,.8) 58%,rgba(38,85,160,.35))}.business-card.cyan:hover::before{background:linear-gradient(90deg,rgba(11,120,145,.97),rgba(11,120,145,.8) 58%,rgba(11,120,145,.35))}.business-card.navy:hover::before{background:linear-gradient(90deg,rgba(11,38,56,.98),rgba(11,38,56,.84) 58%,rgba(11,38,56,.4))}
+@media(max-width:760px){.business-card::before{background:linear-gradient(90deg,rgba(255,255,255,.98),rgba(255,255,255,.9) 62%,rgba(255,255,255,.35))}.business-card-image{object-position:65% center}}
